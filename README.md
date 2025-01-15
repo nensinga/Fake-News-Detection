@@ -108,11 +108,3 @@ Contributions are welcome! Please follow these steps:
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- Thanks to the developers of the open-source NLP and ML tools used in this project.
-- Inspired by efforts to combat misinformation and promote digital literacy.
-
----
-
-Feel free to reach out with questions, suggestions, or feature requests by opening an issue on GitHub!
