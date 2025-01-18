@@ -3,5 +3,5 @@ auth: none
 cert: false
 user-data-dir: /home/pythonic
 extensions-dir: /home/pythonic/extensions
-disable-update-check: true
+disable-update-check: false
 disable-telemetry: true
