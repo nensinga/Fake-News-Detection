@@ -5,77 +5,71 @@ import (
 	"io"
 )
 
-// ReplaySet is a data structure used to efficiently record the occurrence of
-// replays, identified by sequence number, when processing a Batch. Its primary
-// functionality includes set construction, membership queries, and merging of
-// replay sets.
+// ReplaySet is a data structure used to efficiently track replays by sequence
+// numbers during batch processing. It supports operations like membership
+// queries, merging, and serialization.
 type ReplaySet struct {
 	replays map[uint16]struct{}
 }
 
-// NewReplaySet initializes an empty replay set.
+// NewReplaySet initializes an empty ReplaySet.
 func NewReplaySet() *ReplaySet {
 	return &ReplaySet{
 		replays: make(map[uint16]struct{}),
 	}
 }
 
-// Size returns the number of elements in the replay set.
+// Size returns the number of elements in the ReplaySet.
 func (rs *ReplaySet) Size() int {
 	return len(rs.replays)
 }
 
-// Add inserts the provided index into the replay set.
+// Add inserts a sequence number into the ReplaySet.
 func (rs *ReplaySet) Add(idx uint16) {
 	rs.replays[idx] = struct{}{}
 }
 
-// Contains queries the contents of the replay set for membership of a
-// particular index.
+// Contains checks if a sequence number exists in the ReplaySet.
 func (rs *ReplaySet) Contains(idx uint16) bool {
-	_, ok := rs.replays[idx]
-	return ok
+	_, exists := rs.replays[idx]
+	return exists
 }
 
-// Merge adds the contents of the provided replay set to the receiver's set.
-func (rs *ReplaySet) Merge(rs2 *ReplaySet) {
-	for seqNum := range rs2.replays {
+// Merge combines another ReplaySet into the current ReplaySet.
+func (rs *ReplaySet) Merge(other *ReplaySet) {
+	for seqNum := range other.replays {
 		rs.Add(seqNum)
 	}
 }
 
-// Encode serializes the replay set into an io.Writer suitable for storage. The
-// replay set can be recovered using Decode.
+// Encode serializes the ReplaySet into an `io.Writer` for storage or transmission.
+// The replay set can be reconstructed using `Decode`.
 func (rs *ReplaySet) Encode(w io.Writer) error {
 	for seqNum := range rs.replays {
-		err := binary.Write(w, binary.BigEndian, seqNum)
-		if err != nil {
+		if err := binary.Write(w, binary.BigEndian, seqNum); err != nil {
 			return err
 		}
 	}
-
 	return nil
 }
 
-// Decode reconstructs a replay set given a io.Reader. The byte
-// slice is assumed to be even in length, otherwise resulting in failure.
+// Decode reconstructs a ReplaySet from an `io.Reader`.
+// Expects the input to be a valid sequence of `uint16` values.
 func (rs *ReplaySet) Decode(r io.Reader) error {
 	for {
-		// seqNum provides to buffer to read the next uint16 index.
 		var seqNum uint16
 
+		// Attempt to read the next sequence number.
 		err := binary.Read(r, binary.BigEndian, &seqNum)
-		switch err {
-		case nil:
-			// Successful read, proceed.
-		case io.EOF:
+		if err == io.EOF {
+			// Successfully reached the end of the input.
 			return nil
-		default:
-			// Can return ErrShortBuffer or ErrUnexpectedEOF.
+		} else if err != nil {
+			// Handle unexpected read errors.
 			return err
 		}
 
-		// Add this decoded sequence number to the set.
+		// Add the decoded sequence number to the ReplaySet.
 		rs.Add(seqNum)
 	}
 }
