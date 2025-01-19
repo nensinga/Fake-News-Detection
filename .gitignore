@@ -1,12 +1,12 @@
-# Ignore node_modules and dependencies
+# Dependency directories
 node_modules/
 package-lock.json
 
-# Ignore build files
+# Build output
 dist/
 build/
 
-# Ignore system files
+# System-specific files
 .DS_Store
 Thumbs.db
 
