@@ -28,6 +28,3 @@ Thank you for your interest in contributing to Fake News Detection! Contribution
 
 Please be respectful and constructive in your communication. We aim to create a positive and collaborative environment for everyone.
 
-## Reporting Issues
-
-If you encounter any bugs or have suggestions, please [open an issue](https://github.com/yourusername/fake-news-detection/issues) with a clear description.
