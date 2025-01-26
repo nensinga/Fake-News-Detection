@@ -70,7 +70,7 @@ def command(col: AnsiCodes, text: str):
 
 def section(text):
     """
-    Used to print hero section headers
+    Used to print hero section
     """
     print(f"{PROMPT} {Fore.LIGHTRED_EX}{text}{Fore.WHITE}")
 
