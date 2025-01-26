@@ -59,7 +59,7 @@ func (rs *ReplaySet) Decode(r io.Reader) error {
 	for {
 		var seqNum uint16
 
-		// Attempt to read the next sequence number.
+		// Attempt to read the next sequence proposal
 		err := binary.Read(r, binary.BigEndian, &seqNum)
 		if err == io.EOF {
 			// Successfully reached the end of the input.
