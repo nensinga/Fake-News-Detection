@@ -1,6 +1,9 @@
 ![Verify News Accuracy with AI](https://i.ibb.co/WDnj7Ct/FND.jpg)
 # Fake News Detection
 
+🔗 **[X.com](https://x.com/FNDetection)** <br>  
+🔗 **[Website](https://fakenewsdetection.com/)**<br>  
+
 Fake News Detection is an advanced tool designed to analyze and assess the credibility of news articles and social media posts. By leveraging cutting-edge technologies like Natural Language Processing (NLP), Machine Learning (ML), Fact-Checking Integration, and Network Analysis, this platform provides reliable insights into the authenticity of content. Its features aim to combat the spread of misinformation and enhance media literacy among users.
 
 ## Key Technologies
