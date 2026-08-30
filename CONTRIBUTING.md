@@ -22,6 +22,11 @@ Thank you for your interest in contributing to Fake News Detection! Contribution
    ```bash
    git push origin feature-name
    ```
+6. Push your changes to your fork:
+   ```bash
+   git push origin feature-name
+   ```
+   
 7. Submit a pull request to the main repository.
 
 ## Code of Conduct
